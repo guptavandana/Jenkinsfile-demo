@@ -1,0 +1,22 @@
+node{    
+      stage('First Stage') {                  
+            echo 'This stage will be executed first.'      
+       }      
+       stage('Second Stage') {    
+              if (env.BRANCH_NAME == 'master') {
+                  echo 'This stage will not execute.'
+            }
+           
+       }      
+      stage('Third Stage') {      
+                parallel(
+               'Branch A': {
+                   echo "On Branch A"
+                },
+                'Branch B': {
+                    echo "On Branch B"
+                  }
+           )
+      }     
+ }
+

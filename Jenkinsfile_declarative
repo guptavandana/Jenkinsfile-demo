@@ -1,0 +1,33 @@
+pipeline {      
+     agent any      
+     stages {      
+          stage('First Stage') {      
+               steps {      
+                    echo 'This stage will be executed first.'      
+             }      
+           }      
+           stage('Second Stage') {      
+             when {      
+                    branch 'master'      
+              }      
+             steps {      
+                    echo 'This stage will not execute.'      
+             }      
+           }      
+          stage('Third Stage') {      
+               parallel {     
+                    stage('Branch A') {    
+                        steps {  
+                              echo "On Branch A" 
+                        }  
+                     }    
+                     stage('Branch B') {    
+                          steps {  
+                               echo "On Branch B" 
+                         }  
+                     }    
+               }     
+          }     
+     }      
+}      
+
